@@ -4,7 +4,11 @@
 
 GitHub Actions pull request workflow.
 
-A PR (pull request) is created when new commits are made to the [master](https://github.com/remarkablemark/github-actions-pull-request-workflow/tree/master) branch. See [workflow](.github/workflows/pull-request.yml).
+A PR (pull request) is created when new commits are made to the [master](https://github.com/remarkablemark/github-actions-pull-request-workflow/tree/master) branch.
+
+See the [workflow](.github/workflows/pull-request.yml).
+
+> **Note**: For this to work, you must go to **Settings** > **Actions** > **Workflow permissions** and check `Allow GitHub Actions to create and approve pull requests`
 
 ## License
 
