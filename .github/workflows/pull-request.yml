@@ -1,11 +1,11 @@
-name: Create Pull Request
+name: Pull Request
 on:
   push:
     branches:
       - integration
 
 jobs:
-  create-pull-request:
+  pull-request:
     runs-on: ubuntu-latest
 
     steps:
