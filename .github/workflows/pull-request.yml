@@ -16,7 +16,6 @@ jobs:
 
     # master -> production
     - name: Create Pull Request
-      # title will look like "INT YYYY-MM-DD"
       run: |
         DATE=$(date +'%Y-%m-%d')
         gh pr create --base production --fill --title $DATE
