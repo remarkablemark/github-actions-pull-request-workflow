@@ -23,14 +23,16 @@ jobs:
     - name: Create Release PR
       run: |
         DATE=$(date +'%Y-%m-%d')
-        gh pr create --base production --fill --label release --title $DATE
+        PR_URL=$(gh pr create --base production --fill --label release --title $DATE)
+        echo "PR_URL=$PR_URL" >> $GITHUB_ENV
       continue-on-error: true
 
     - name: Convert open PRs to Draft
+      if: env.PR_URL
       run: >
         gh pr list --base master --draft false --state open |
         awk '{print $1}' |
-        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on #${{ env.RELEASE_PR }}" {}'
+        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Blocked by ${{ env.PR_URL }}" {}'
 
   post-release:
     runs-on: ubuntu-latest
