@@ -22,4 +22,4 @@ jobs:
       run: >
         gh pr list --base master --state open |
         awk '{print $1}' |
-        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on ${{ env.RELEASE_PR }}" {}'
+        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on #${{ env.RELEASE_PR }}" {}'
