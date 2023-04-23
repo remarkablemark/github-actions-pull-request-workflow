@@ -42,8 +42,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Convert open PRs to Ready
+    - name: Convert draft PRs to Ready
       run: >
-        gh pr list --base master --state open |
+        gh pr list --base master --draft --state open |
         awk '{print $1}' |
         xargs -I{} sh -c 'gh pr ready {}; gh pr comment --body ":white_check_mark: Ready for review" {}'
