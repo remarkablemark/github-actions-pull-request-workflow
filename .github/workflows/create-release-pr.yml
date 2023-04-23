@@ -1,11 +1,11 @@
-name: Pull Request
+name: Create Release PR
 on:
   push:
     branches:
       - master
 
 jobs:
-  pull-request:
+  create-release-pr:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +15,7 @@ jobs:
         fetch-depth: 0
 
     # master -> production
-    - name: Create Pull Request
+    - name: Create Release PR
       run: |
         DATE=$(date +'%Y-%m-%d')
         gh pr create --base production --fill --label release --title $DATE
