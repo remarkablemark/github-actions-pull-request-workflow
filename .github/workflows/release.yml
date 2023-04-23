@@ -26,6 +26,13 @@ jobs:
         gh pr create --base production --fill --label release --title $DATE
       continue-on-error: true
 
+    - name: Convert open PRs to Draft
+      if: env.RELEASE_PR
+      run: >
+        gh pr list --base master --draft false --state open |
+        awk '{print $1}' |
+        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on #${{ env.RELEASE_PR }}" {}'
+
   post-release:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/production'
