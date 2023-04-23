@@ -1,11 +1,11 @@
-name: Create Release PR
+name: Release
 on:
   push:
     branches:
       - master
 
 jobs:
-  create-release-pr:
+  release:
     runs-on: ubuntu-latest
 
     steps:
