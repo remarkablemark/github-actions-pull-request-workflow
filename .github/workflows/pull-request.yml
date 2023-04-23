@@ -15,12 +15,12 @@ jobs:
 
     - name: Find Release PR
       run: |
-        RELEASE_PR=$(gh pr list --base production --label release --state open --json number --jq '.[0].number')
-        echo "RELEASE_PR=$RELEASE_PR" >> $GITHUB_ENV
+        PR_URL=$(gh pr list --base production --label release --state open --json url --jq '.[0].url')
+        echo "PR_URL=$PR_URL" >> $GITHUB_ENV
 
     - name: Convert open PRs to Draft
-      if: env.RELEASE_PR
+      if: env.PR_URL
       run: >
         gh pr list --base master --state open |
         awk '{print $1}' |
-        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on #${{ env.RELEASE_PR }}" {}'
+        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Blocked by ${{ env.PR_URL }}" {}'
