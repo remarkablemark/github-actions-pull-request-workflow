@@ -1,0 +1,22 @@
+name: Pull Request
+on: pull_request
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    if: github.base_ref == 'master'
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+    - name: Find Release PR
+      run: |
+        RELEASE_PR=$(gh pr list --label release --state open --json number --jq '.[0].number')
+        echo "RELEASE_PR=$RELEASE_PR" >> $GITHUB_ENV
+
+    - name: Convert open PRs to Draft
+      if: env.RELEASE_PR
+      run: >
+        gh pr list --base master --state open |
+        awk '{print $1}' |
+        xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Waiting on ${{ env.RELEASE_PR }}" {}'
