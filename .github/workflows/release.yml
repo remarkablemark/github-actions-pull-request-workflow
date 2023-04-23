@@ -3,10 +3,15 @@ on:
   push:
     branches:
       - master
+      - production
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
 
 jobs:
-  release:
+  pre-release:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
 
     steps:
     - name: Checkout
@@ -19,6 +24,18 @@ jobs:
       run: |
         DATE=$(date +'%Y-%m-%d')
         gh pr create --base production --fill --label release --title $DATE
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
       continue-on-error: true
+
+  post-release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/production'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Convert open PRs to Ready
+      run: >
+        gh pr list --base master --state open |
+        awk '{print $1}' |
+        xargs -I{} sh -c 'gh pr ready {}; gh pr comment --body ":white_check_mark: Ready to merge" {}'
