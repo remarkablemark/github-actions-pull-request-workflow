@@ -27,7 +27,6 @@ jobs:
       continue-on-error: true
 
     - name: Convert open PRs to Draft
-      if: env.RELEASE_PR
       run: >
         gh pr list --base master --draft false --state open |
         awk '{print $1}' |
