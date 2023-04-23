@@ -1,12 +1,13 @@
 name: Pull Request
 on: pull_request
 
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
 jobs:
   pull-request:
     runs-on: ubuntu-latest
     if: github.base_ref == 'master'
-    env:
-      GITHUB_TOKEN: ${{ github.token }}
 
     steps:
     - name: Checkout
