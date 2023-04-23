@@ -30,7 +30,7 @@ jobs:
     - name: Convert open PRs to Draft
       if: env.PR_URL
       run: >
-        gh pr list --base master --draft false --state open |
+        gh pr list --base master --draft=false --state open |
         awk '{print $1}' |
         xargs -I{} sh -c 'gh pr ready --undo {}; gh pr comment --body ":x: Blocked by ${{ env.PR_URL }}" {}'
 
