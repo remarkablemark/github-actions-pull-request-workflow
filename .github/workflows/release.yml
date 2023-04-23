@@ -38,4 +38,4 @@ jobs:
       run: >
         gh pr list --base master --state open |
         awk '{print $1}' |
-        xargs -I{} sh -c 'gh pr ready {}; gh pr comment --body ":white_check_mark: Ready to merge" {}'
+        xargs -I{} sh -c 'gh pr ready {}; gh pr comment --body ":white_check_mark: Ready for review" {}'
