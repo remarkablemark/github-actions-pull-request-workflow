@@ -1,6 +1,6 @@
 # github-actions-pull-request-workflow
 
-[![Release](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/release.yml/badge.svg)](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/release.yml)
+[![Create Pull Request](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/create-pull-request.yml/badge.svg)](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/create-pull-request.yml)
 [![Check Merge](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/check-merge.yml/badge.svg)](https://github.com/remarkablemark/github-actions-pull-request-workflow/actions/workflows/check-merge.yml)
 
 GitHub Actions pull request workflow:
