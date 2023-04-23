@@ -1,16 +1,16 @@
-name: Pull Request
+name: Check Merge
 on: pull_request
 
 env:
   GITHUB_TOKEN: ${{ github.token }}
 
 jobs:
-  pull-request:
+  check-merge:
     runs-on: ubuntu-latest
     if: github.base_ref == 'master'
 
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Find Release PR
