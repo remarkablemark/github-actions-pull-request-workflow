@@ -11,7 +11,7 @@ env:
 jobs:
   pre-release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref_name == 'master'
 
     steps:
     - name: Checkout repository
@@ -36,7 +36,7 @@ jobs:
 
   post-release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/production'
+    if: github.ref_name == 'production'
 
     steps:
     - name: Checkout repository
